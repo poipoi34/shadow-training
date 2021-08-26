@@ -32,7 +32,7 @@ public class lighting_up_squares : MonoBehaviour
     [HideInInspector] public List<float> coeff_list;
 
     int fake_rolled = 0;
-    int max_fake_roll = 200000;
+    public int max_fake_roll = 2;
     public float fake_frequency = 0.1f;
     GameObject last_faked_guy = null; 
 
@@ -48,6 +48,7 @@ public class lighting_up_squares : MonoBehaviour
     public GameObject input_fake_frequency;
     public GameObject input_defence_frequency;
     public GameObject coeff_inputs;
+    public GameObject input_max_fake_roll;
 
 
 
@@ -79,8 +80,6 @@ public class lighting_up_squares : MonoBehaviour
         coeff_list = new List<float>() { 1f, 1f, 1f, 1f, 1.3f, 1.3f };
 
         delay_list = new List<float>() { -1f, -1f, -1f, -1f, -1f, -1f };
-        print(delay_list.Count);
-        print(delay_list.Count);
         fill_delay_list_with_coeff();
 
         T_before_next = 2f;
@@ -136,6 +135,7 @@ public class lighting_up_squares : MonoBehaviour
         input_defence_frequency.GetComponent<InputField>().text = defence_frequency.ToString();
         for (int i = 0; i < 6; i++)
             coeff_inputs.GetComponent<Transform>().GetChild(i).GetComponent<InputField>().text = coeff_list[i].ToString();
+        input_max_fake_roll.GetComponent<InputField>().text = max_fake_roll.ToString();
     }
 
     public void fill_delay_list_with_coeff()

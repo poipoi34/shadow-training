@@ -60,4 +60,10 @@ public class var_changer : MonoBehaviour
             
     }
 
+    public void change_max_successive_fake()
+    {
+        int a = int.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        square_handler.GetComponent<lighting_up_squares>().max_fake_roll = a;
+    }
+
 }
