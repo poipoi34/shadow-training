@@ -75,8 +75,6 @@ public class lighting_up_squares : MonoBehaviour
         square_list.Add(bot_left_square);
         square_list.Add(bot_right_square);
 
-        global_time_delay = 3f; 
-
         coeff_list = new List<float>() { 1f, 1f, 1f, 1f, 1.3f, 1.3f };
 
         delay_list = new List<float>() { -1f, -1f, -1f, -1f, -1f, -1f };

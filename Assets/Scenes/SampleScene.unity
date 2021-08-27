@@ -1346,7 +1346,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 214242807}
         m_TargetAssemblyTypeName: var_changer, Assembly-CSharp
-        m_MethodName: change_fake_frequency
+        m_MethodName: change_max_successive_fake
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3741,9 +3741,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doing_shit: 0
-  global_time_delay: 0
+  global_time_delay: 3
   coeff_list: []
-  max_fake_roll: 200000
+  max_fake_roll: 2
   fake_frequency: 0.1
   defence_frequency: 0.5
   input_delay_time: {fileID: 350678542}
