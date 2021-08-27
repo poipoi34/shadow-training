@@ -27,13 +27,16 @@ public class lighting_up_squares : MonoBehaviour
     List<GameObject> square_list;
     List<float> delay_list;
 
-    public float global_time_delay;
+    
 
     [HideInInspector] public List<float> coeff_list;
-
+    public float global_time_delay;
     int fake_rolled = 0;
-    public int max_fake_roll = 2;
-    public float fake_frequency = 0.1f;
+    public int max_fake_roll;
+    public float fake_frequency;
+    public float training_time;
+
+    [HideInInspector] public float training_time_left;
     GameObject last_faked_guy = null; 
 
     public float defence_frequency = 0.5f;
@@ -42,6 +45,9 @@ public class lighting_up_squares : MonoBehaviour
     Color blue = new Color(0, 0, 1);
     Color grey = new Color(0.5f, 0.5f, 0.5f);
 
+    //useful Gameobjects link
+    public GameObject game_handler;
+    public GameObject training_time_left_text;
 
     //textboxes are stored here so that i can at start of execution fill the input boxes (didn't find better way)
     public GameObject input_delay_time;
@@ -88,8 +94,14 @@ public class lighting_up_squares : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (doing_shit)
         {
+            if (training_time_left < 0)
+                game_handler.GetComponent<interface_handler>().Set_mode("menu");
+
+            training_time_left -= Time.deltaTime;
+            training_time_left_text.GetComponent<Text>().text = ((int)training_time_left).ToString();
             T_before_next -= Time.deltaTime;
             if (T_before_next <= 0)
             {

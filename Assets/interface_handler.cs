@@ -58,7 +58,11 @@ public class interface_handler : MonoBehaviour
         interfaces[mode].SetActive(true);
 
         if (mode == "game")
+        {
             square_handler.GetComponent<lighting_up_squares>().doing_shit = true;
+            square_handler.GetComponent<lighting_up_squares>().training_time_left = square_handler.GetComponent<lighting_up_squares>().training_time;
+        }
+            
 
         /*
         if (mode == "game" || mode == "menu")
