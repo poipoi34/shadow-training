@@ -14,7 +14,7 @@ public class boundary_controller : MonoBehaviour
         Transform transform = this.GetComponent<Transform>();
         Transform last_child = transform.GetChild(transform.childCount - 1);
 
-        y_highest = -370 - last_child.transform.localPosition.y + last_child.GetComponent<RectTransform>().rect.height;
+        y_highest = -460 - last_child.transform.localPosition.y + last_child.GetComponent<RectTransform>().rect.height;
         print(y_highest);
     }
 
