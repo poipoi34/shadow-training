@@ -35,6 +35,7 @@ public class lighting_up_squares : MonoBehaviour
     public int max_fake_roll;
     public float fake_frequency;
     public float training_time;
+    public float deception_time = 0.4f;
 
     [HideInInspector] public float training_time_left;
     GameObject last_faked_guy = null; 
@@ -54,9 +55,7 @@ public class lighting_up_squares : MonoBehaviour
     public GameObject input_fake_frequency;
     public GameObject input_defence_frequency;
     public GameObject coeff_inputs;
-    public GameObject input_max_fake_roll;
-
-
+    public GameObject input_deception_time;
 
 
 
@@ -112,13 +111,13 @@ public class lighting_up_squares : MonoBehaviour
                 bool defence_roll = Random.Range(0.0f, 1.0f) < defence_frequency;
 
                 if (last_faked_guy != null){
-                    last_faked_guy.GetComponent<light_up>().activate(0.3f, grey);
+                    last_faked_guy.GetComponent<light_up>().activate(deception_time*0.8f, grey);
                     last_faked_guy = null;
                 }
                 if (fake_roll)
                 {
-                    square_list[i].GetComponent<light_up>().activate(0.4f, red);
-                    T_before_next += 0.4f;
+                    square_list[i].GetComponent<light_up>().activate(deception_time, red);
+                    T_before_next += deception_time;
                     fake_rolled += 1;
                     last_faked_guy = square_list[i];
                 }
@@ -145,7 +144,7 @@ public class lighting_up_squares : MonoBehaviour
         input_defence_frequency.GetComponent<InputField>().text = defence_frequency.ToString();
         for (int i = 0; i < 6; i++)
             coeff_inputs.GetComponent<Transform>().GetChild(i).GetComponent<InputField>().text = coeff_list[i].ToString();
-        input_max_fake_roll.GetComponent<InputField>().text = max_fake_roll.ToString();
+        input_deception_time.GetComponent<InputField>().text = deception_time.ToString();
     }
 
     public void fill_delay_list_with_coeff()

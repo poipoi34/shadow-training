@@ -68,8 +68,14 @@ public class var_changer : MonoBehaviour
 
     public void change_training_time()
     {
-        float a = int.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        int a = int.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
         square_handler.GetComponent<lighting_up_squares>().training_time = a;
+    }
+
+    public void change_deception_time()
+    {
+        float a = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        square_handler.GetComponent<lighting_up_squares>().deception_time = a;
     }
 
 }

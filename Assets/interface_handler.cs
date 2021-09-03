@@ -11,6 +11,11 @@ public class interface_handler : MonoBehaviour
     public GameObject menu;
     public GameObject config;
     public GameObject coeff_config;
+    public GameObject info;
+
+    public GameObject language_handler;
+
+    public string language;
 
     public GameObject square_handler;
     [HideInInspector] public string mode;
@@ -31,6 +36,8 @@ public class interface_handler : MonoBehaviour
 
         interfaces.Add("coeff config",coeff_config);
 
+        interfaces.Add("info", info);
+
         Set_mode("menu");
 
 
@@ -50,6 +57,8 @@ public class interface_handler : MonoBehaviour
             interfaces[mode].SetActive(false);
             if (mode == "game")
                 square_handler.GetComponent<lighting_up_squares>().doing_shit = false;
+            if (mode == "info")
+                square_handler.SetActive(true);
                 
                 
         }
@@ -62,7 +71,14 @@ public class interface_handler : MonoBehaviour
             square_handler.GetComponent<lighting_up_squares>().doing_shit = true;
             square_handler.GetComponent<lighting_up_squares>().training_time_left = square_handler.GetComponent<lighting_up_squares>().training_time;
         }
-            
+
+        if (mode == "menu" || mode == "config")
+            language_handler.SetActive(true);
+        else
+            language_handler.SetActive(false);
+        if (mode == "info")
+            square_handler.SetActive(false);
+
 
         /*
         if (mode == "game" || mode == "menu")
