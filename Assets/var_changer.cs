@@ -21,7 +21,11 @@ public class var_changer : MonoBehaviour
 
     public void change_fake_frequency()
     {
-        float p = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        float p = 0;
+        if (this.GetComponent<InputField>().text.Contains("."))
+            p = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        else
+            p = float.Parse(this.GetComponent<InputField>().text);
         if (p > 1)
             p = 1;
         if (p < 0)
@@ -31,7 +35,11 @@ public class var_changer : MonoBehaviour
 
     public void change_defence_frequency()
     {
-        float p = float.Parse(this.GetComponent<InputField>().text,NumberStyles.Any, CultureInfo.InvariantCulture);
+        float p = 0;
+        if (this.GetComponent<InputField>().text.Contains("."))
+            p = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        else
+            p = float.Parse(this.GetComponent<InputField>().text);
         if (p > 1)
             p = 1;
         if (p < 0)
@@ -41,7 +49,12 @@ public class var_changer : MonoBehaviour
 
     public void change_delay_time()
     {
-        float t = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        float t = 0;
+        if (this.GetComponent<InputField>().text.Contains("."))
+            t = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        else
+            t = float.Parse(this.GetComponent<InputField>().text);
+
         if (t < 0.5f)
             t = 0.5f;
         square_handler.GetComponent<lighting_up_squares>().global_time_delay = t;
@@ -50,7 +63,12 @@ public class var_changer : MonoBehaviour
 
     public void change_coeff(int i)
     {
-        float a = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        float a = 0;
+        if (this.GetComponent<InputField>().text.Contains("."))
+            a = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        else
+            a = float.Parse(this.GetComponent<InputField>().text);
+
         if (a < 0)
             a = 0f;
         if (a > 50)
@@ -62,19 +80,32 @@ public class var_changer : MonoBehaviour
 
     public void change_max_successive_fake()
     {
-        int a = int.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
-        square_handler.GetComponent<lighting_up_squares>().max_fake_roll = a;
+        float a = 0;
+        if (this.GetComponent<InputField>().text.Contains("."))
+            a = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        else
+            a = float.Parse(this.GetComponent<InputField>().text);
+        square_handler.GetComponent<lighting_up_squares>().max_fake_roll = (int)a;
     }
 
     public void change_training_time()
     {
-        int a = int.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
-        square_handler.GetComponent<lighting_up_squares>().training_time = a;
+        float a = 0;
+        if (this.GetComponent<InputField>().text.Contains("."))
+            a = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        else
+            a = float.Parse(this.GetComponent<InputField>().text);
+        square_handler.GetComponent<lighting_up_squares>().training_time = (int)a;
     }
 
     public void change_deception_time()
     {
-        float a = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        float a = 0;
+        if (this.GetComponent<InputField>().text.Contains("."))
+            a = float.Parse(this.GetComponent<InputField>().text, NumberStyles.Any, CultureInfo.InvariantCulture);
+        else
+        a = float.Parse(this.GetComponent<InputField>().text);
+        
         square_handler.GetComponent<lighting_up_squares>().deception_time = a;
     }
 
