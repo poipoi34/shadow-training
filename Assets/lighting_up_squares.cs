@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class lighting_up_squares : MonoBehaviour
 {
@@ -54,22 +56,33 @@ public class lighting_up_squares : MonoBehaviour
     public GameObject input_delay_time;
     public GameObject input_fake_frequency;
     public GameObject input_defence_frequency;
-    public GameObject coeff_inputs;
+	public GameObject coeff_inputs;
     public GameObject input_deception_time;
 
+	//TMP_InputField Settings
+	[Header("InputBoxes for Settings")]
+	public TMP_InputField tmp_delay_time;
+	public TMP_InputField tmp_fake_frequency;
+	public TMP_InputField tmp_defence_frequency;
+	public TMP_InputField tmp_deception_time;
+
+	
 
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
+		LinkInputBoxesToVariables();
+		
 
-        top_left_square = this.transform.GetChild(0).gameObject;
+		top_left_square = this.transform.GetChild(0).gameObject;
         top_right_square = this.transform.GetChild(1).gameObject;
         mid_left_square = this.transform.GetChild(2).gameObject;
         mid_right_square = this.transform.GetChild(3).gameObject;
         bot_left_square = this.transform.GetChild(4).gameObject;
         bot_right_square = this.transform.GetChild(5).gameObject;
 
+		
         square_list = new List<GameObject>();
         delay_list = new List<float>();
 
@@ -90,8 +103,37 @@ public class lighting_up_squares : MonoBehaviour
         fill_input_boxes();
     }
 
-    // Update is called once per frame
-    void Update()
+	private void LinkInputBoxesToVariables()
+	{
+		if (tmp_delay_time)
+			tmp_delay_time.onValueChanged.AddListener((v) =>
+			{
+				global_time_delay = float.Parse(v);
+			});
+
+		if (tmp_fake_frequency)
+			tmp_fake_frequency.onValueChanged.AddListener((v) =>
+			{
+				fake_frequency = float.Parse(v);
+			});
+
+		if (tmp_defence_frequency)
+			tmp_defence_frequency.onValueChanged.AddListener((v) =>
+			{
+				defence_frequency = float.Parse(v);
+			});
+
+		if (tmp_deception_time)
+			tmp_deception_time.onValueChanged.AddListener((v) =>
+			{
+				deception_time = float.Parse(v);
+			});
+		
+
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         
         if (doing_shit)
@@ -104,11 +146,11 @@ public class lighting_up_squares : MonoBehaviour
             T_before_next -= Time.deltaTime;
             if (T_before_next <= 0)
             {
-                int i = Random.Range(0, 6);
+                int i = UnityEngine.Random.Range(0, 6);
                 while (last_faked_guy != null && square_list[i] == last_faked_guy)
-                    i = Random.Range(0, 6);
-                bool fake_roll = Random.Range(0.0f, 1.0f) < fake_frequency && fake_rolled < max_fake_roll;
-                bool defence_roll = Random.Range(0.0f, 1.0f) < defence_frequency;
+                    i = UnityEngine.Random.Range(0, 6);
+                bool fake_roll = UnityEngine.Random.Range(0.0f, 1.0f) < fake_frequency && fake_rolled < max_fake_roll;
+                bool defence_roll = UnityEngine.Random.Range(0.0f, 1.0f) < defence_frequency;
 
                 if (last_faked_guy != null){
                     last_faked_guy.GetComponent<light_up>().activate(deception_time*0.8f, grey);
@@ -145,7 +187,13 @@ public class lighting_up_squares : MonoBehaviour
         for (int i = 0; i < 6; i++)
             coeff_inputs.GetComponent<Transform>().GetChild(i).GetComponent<InputField>().text = coeff_list[i].ToString();
         input_deception_time.GetComponent<InputField>().text = deception_time.ToString();
-    }
+
+		//TMP
+		tmp_delay_time.text = global_time_delay.ToString();
+		tmp_fake_frequency.text = fake_frequency.ToString();
+		tmp_defence_frequency.text = defence_frequency.ToString();
+		tmp_deception_time.text = deception_time.ToString();
+	}
 
     public void fill_delay_list_with_coeff()
     {
